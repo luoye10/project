@@ -1,10 +1,8 @@
 <template>
-    <div class="box">
-        <div class="lyrics">
-            <ul class="lyric-list">
-                <li class="lyric" v-for="lyric in lyrics" :key="lyric.message">{{lyric}}</li>
-            </ul>
-        </div>
+    <div class="lyrics">
+        <ul class="lyric-list">
+            <li class="lyric" v-for="lyric in lyrics" :key="lyric.message">{{lyric}}</li>
+        </ul>
     </div>
 </template>
 <script>
@@ -14,12 +12,14 @@ export default {
     ],
     data(){
         return {
-            lyrics: []
+            lyrics: [],
+            lyricTime: [],
+            lyric: ''
         }
     },
     mounted(){
-        console.log(this.id)
         this.request()
+        this.lyric = document.getElementsByClassName('lyric')
     },
     methods: {
         request(){
@@ -35,6 +35,16 @@ export default {
                 }
             }
             xhr.send(null)
+        },
+        highlight(playTime){
+            for(var i = 0 ; i < this.lyricTime.length; i++){
+                if(playTime >= this.lyricTime[i] && playTime < this.lyricTime[i + 1]){
+                    this.lyric[i].style.color = ''
+                    this.lyric[i + 1].style.color = 'red'
+                    this.lyric[i + 1].parentNode.scrollTop = (i + 1) * 20
+                    break
+                }
+            }
         }
     }
 }
@@ -46,29 +56,32 @@ export default {
         list-style: none;
     }
     .lyrics{
-        width: 500px;
-        height: 400px;
-        overflow-y: auto;
-        margin: -20px auto;
-        .lyric{
-            margin-bottom: 5px;
-            height: 20px;
+        
+        .lyric-list{
+            width: 600px;
+            height: 400px;
+            overflow-y: auto;
+            margin: 20px auto;
             text-align: center;
-            color: rgba(192, 168, 30, 0.747)
+            .lyric{
+                margin: 10px auto;
+                height: 20px;
+                text-align: center;
+                color: rgba(192, 168, 30, 0.747)
+            }
         }
-    }
-    .lyrics::-webkit-scrollbar{
-        width: 10px;
-    }
-    .lyrics::-webkit-scrollbar-track{
-        width: 10px;
-        border-radius: 5px;
-        background: #adf;
-    }
-    .lyrics::-webkit-scrollbar-thumb{
-        height: 10px;
-        border-radius: 5px;
-        background: aqua;
+        .lyric-list::-webkit-scrollbar{
+            width: 10px;
+        }
+        .lyric-list::-webkit-scrollbar-track{
+            width: 10px;
+            border-radius: 10px;
+            background: #adf;
+        }
+        .lyric-list::-webkit-scrollbar-thumb{
+            border-radius: 10px;
+            background: aqua;
+        }   
     }
     
 </style>

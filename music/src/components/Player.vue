@@ -6,9 +6,9 @@
             <i class="el-icon-video-play " v-show="!isPlay"></i>
         </div>
         <i class="el-icon-caret-right right" @click="next"></i>
-        <div class="nowTime"></div>
+        <div class="nowTime">{{this.currentTime}}</div>
         <div class="progress">
-            <div class="now"></div>
+            <div class="now" :style="{width: changeW}"></div>
         </div>
         <div class="end">{{this.allTime}}</div>
         <audio src=""></audio>
@@ -24,7 +24,10 @@ export default {
         return {
             isPlay: false,
             audio: null,
-            allTime: ''
+            allTime: '',
+            currentTime: '00:00',
+            timer: null,
+            changeW: ''   
         }
     },
     mounted(){
@@ -34,11 +37,24 @@ export default {
     },
     methods: {
         button(){
+            this.currentTime = this.getTime(this.audio.currentTime)
             this.isPlay = !this.isPlay
             if(this.isPlay){
                 this.audio.play()
+                this.timer = setInterval(() => {
+                    var t = this.audio.currentTime,
+                    all = this.time / 1000;
+                    this.changeW = t / all * 100 + '%'
+                    this.currentTime = this.getTime(this.audio.currentTime)
+                    this.$parent.$children[0].highlight(this.currentTime)
+                    if(Math.floor(t) === Math.floor(all)){
+                        this.audio.pause()
+                        this.isPlay = !this.isPlay
+                    }
+                },1000)
             }else{
                 this.audio.pause()
+                clearInterval(this.timer)
             }
         },
         prev(){
@@ -61,13 +77,23 @@ export default {
             xhr.send(null)
         },
         format(t){
-            console.log(t)
             var m = Math.floor(t / 60000),
             s = String(t % 60000).slice(0,2)
             t = '0' + m + ':' + s 
             return t
+        },
+        getTime(paramTime){
+            paramTime = Math.floor(paramTime)
+            if(paramTime < 60){
+                paramTime = '00:' + (paramTime < 10 ? '0' + paramTime : paramTime)
+            }else{
+                let m = Math.floor(paramTime / 60),
+                s = paramTime % 60
+                paramTime = '0' + m  + ':' + (s < 10 ? '0' + s : s) 
+            }
+            return paramTime
         }
-        
+       
     }
 }
 </script>
@@ -78,11 +104,11 @@ export default {
         position: fixed;
         bottom: 0;
         left: 0;
-        border-top: 1px solid aqua;
+        border-top: 1px solid pink;
+        background: rgba(17, 207, 207, 0.788);
         vertical-align: middle;
         text-align: center;
         line-height: 80px;
-        background: rgba(199, 188, 188, 0.87);
         .left,.btn,.right{
             display: inline-block;
             font-size: 30px;
@@ -98,6 +124,7 @@ export default {
             margin: 0 10px;
             color: aqua;
             vertical-align: middle;
+            line-height: 20px;
         }
         .progress{
             display: inline-block;
@@ -111,6 +138,7 @@ export default {
                 height: 20px;
                 cursor: pointer;
                 border-radius: 20px;
+                background: rgba(20, 162, 206, 0.87);
             }
         }
         .end{

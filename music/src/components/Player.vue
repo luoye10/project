@@ -49,7 +49,7 @@ export default {
                     this.$parent.$children[0].highlight(this.currentTime)
                     if(Math.floor(t) === Math.floor(all)){
                         this.audio.pause()
-                        this.isPlay = !this.isPlay
+                        this.isPlay = true
                     }
                 },1000)
             }else{

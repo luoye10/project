@@ -51,7 +51,7 @@ export default {
     methods: {
         query(){
             var xhr = new XMLHttpRequest();
-            var url = 'https://btea.site/music//search?keywords=' + this.word;
+            var url = 'https://btea.site/music/search?keywords=' + this.word;
             xhr.open('get',url);
             xhr.onreadystatechange = () => {
                 if(xhr.readyState === 4){

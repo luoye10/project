@@ -7,7 +7,7 @@
         </div>
         <i class="el-icon-caret-right right" @click="next"></i>
         <div class="nowTime">{{this.currentTime}}</div>
-        <div class="progress">
+        <div class="progress" @click="get">
             <div class="now" :style="{width: changeW}"></div>
         </div>
         <div class="end">{{this.allTime}}</div>
@@ -93,7 +93,6 @@ export default {
             }
             return paramTime
         }
-       
     }
 }
 </script>

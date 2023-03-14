@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            html,
+            body {
+                height: 100%;
+                overflow: hidden;
+                margin: 0;
+                background-image: linear-gradient(to left top, #fafdfa, #d9ad9a);
+                background-size: 40px 40px;
+                animation: animate 10s 1s ease infinite alternate;
+            }
+            @keyframes animate {
+                0% {
+                    background-size: 40px 40px;
+                }
+                25% {
+                    background-size: 300px 40px;
+                }
+                50% {
+                    background-size: 300px 300px;
+                }
+                75% {
+                    background-size: 40px 300px;
+                }
+                100% {
+                    background-size: 40px 40px;
+                }
+            }
+            .box {
+                width: 500px;
+                height: 200px;
+                border-width: 6px;
+                border-style: solid;
+                border-color: #adf;
+                background: aqua;
+                text-align: center;
+                margin: 50px auto;
+                position: relative;
+            }
+            .list {
+                width: 0;
+                height: 0;
+                border-width: 20px;
+                border-style: solid;
+                border-color: transparent transparent #adf transparent;
+                position: absolute;
+                left: 50%;
+                bottom: 100%;
+                transform: translate(-50%, 0);
+            }
+            .border {
+                border-width: 10px;
+                border-style: solid;
+                border-color: transparent transparent aqua transparent;
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translate(-50%, -100%);
+            }
+            .items,
+            .holder {
+                width: 300px;
+                display: flex;
+                margin: 10px auto;
+            }
+            .test,
+            .change {
+                width: 100px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+            }
+            .icon,
+            .item {
+                flex: 1;
+                text-align: center;
+                line-height: 30px;
+            }
+            .icon {
+                display: flex;
+            }
+            .reduce,
+            .add {
+                width: 30px;
+                height: 30px;
+                border: 1px solid black;
+                border-radius: 3px;
+                line-height: 30px;
+                cursor: pointer;
+            }
+            .num {
+                width: 60px;
+                height: 30px;
+                border: 1px solid black;
+                margin: 0 10px;
+                line-height: 30px;
+            }
+            .prompt,
+            .pointer {
+                width: 150px;
+                height: 30px;
+                background: #505050;
+                border-radius: 3px;
+                color: white;
+                text-align: center;
+                line-height: 30px;
+                opacity: 0;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="list"></div>
+            <div class="border"></div>
+            <div class="text">这是一个对话框</div>
+        </div>
+        <div class="holder">
+            <div class="change">改变尺寸</div>
+            <div class="icon">
+                <sapn class="reduce">－</sapn>
+                <span class="num">10</span>
+                <sapn class="add">＋</sapn>
+            </div>
+        </div>
+        <div class="items">
+            <div class="test">改变位置</div>
+            <div class="item">
+                <label for="top">
+                    <input type="radio" name="btn" value="top" id="top" checked />
+                    <span class="direction">上</span>
+                </label>
+            </div>
+            <div class="item">
+                <label for="right">
+                    <input type="radio" name="btn" id="right" value="right" />
+                    <span class="direction">右</span>
+                </label>
+            </div>
+            <div class="item">
+                <label for="bottom">
+                    <input type="radio" name="btn" id="bottom" value="bottom" />
+                    <span class="direction">下</span>
+                </label>
+            </div>
+            <div class="item">
+                <label for="left">
+                    <input type="radio" name="btn" id="left" value="left" />
+                    <span class="direction">左</span>
+                </label>
+            </div>
+        </div>
+        <div class="prompt">已设置为最小值</div>
+        <div class="pointer">已设置为最大值</div>
+        <audio src="./11670.mp3" class="audio" loop></audio>
+        <script>
+            let list = getItem('list'),
+                border = getItem('border'),
+                reduce = getItem('reduce'),
+                num = getItem('num'),
+                add = getItem('add'),
+                prompt = getItem('prompt'),
+                pointer = getItem('pointer'),
+                audio = getItem('audio'),
+                inputs = document.querySelectorAll('input');
+            let width = parseInt(window.getComputedStyle(list).borderWidth);
+            let w = parseInt(window.getComputedStyle(border).borderWidth);
+            let n = parseInt(num.innerText);
+            function getItem(item) {
+                return document.getElementsByClassName(item)[0];
+            }
+            reduce.addEventListener('click', function () {
+                audio.play();
+                audio.volume = 0.2;
+                width -= 1;
+                w -= 1;
+                n -= 1;
+                if (w <= 6) {
+                    width = 16;
+                    w = 6;
+                    n = 6;
+                    prompt.style.opacity = '1';
+                    setTimeout(() => {
+                        prompt.style.opacity = '0';
+                    }, 3000);
+                }
+                list.style.borderWidth = width + 'px';
+                border.style.borderWidth = w + 'px';
+                num.innerText = n;
+            });
+            add.addEventListener('click', function () {
+                audio.play();
+                audio.volume = 0.2;
+                width += 1;
+                w += 1;
+                n += 1;
+                if (w >= 30) {
+                    width = 40;
+                    w = 30;
+                    n = 30;
+                    pointer.style.opacity = '1';
+                    setTimeout(() => {
+                        pointer.style.opacity = '0';
+                    }, 3000);
+                }
+                list.style.borderWidth = width + 'px';
+                border.style.borderWidth = w + 'px';
+                num.innerText = n;
+            });
+            const styles = {
+                top: {
+                    list: {
+                        borderColor: 'transparent transparent #adf transparent',
+                        left: '50%',
+                        bottom: '100%',
+                        transform: 'translate(-50%,0)'
+                    },
+                    border: {
+                        borderColor: 'transparent transparent aqua transparent',
+                        left: '50%',
+                        top: '0',
+                        transform: 'translate(-50%,-100%)'
+                    }
+                },
+                right: {
+                    list: {
+                        borderColor: 'transparent transparent transparent #adf',
+                        left: '100%',
+                        bottom: '50%',
+                        transform: 'translate(0,50%)'
+                    },
+                    border: {
+                        borderColor: 'transparent transparent  transparent aqua',
+                        left: '100%',
+                        top: '50%',
+                        transform: 'translate(0,-50%)'
+                    }
+                },
+                bottom: {
+                    list: {
+                        borderColor: '#adf transparent transparent transparent',
+                        left: '50%',
+                        bottom: '0',
+                        transform: 'translate(-50%,100%)'
+                    },
+                    border: {
+                        borderColor: 'aqua transparent transparent  transparent ',
+                        left: '50%',
+                        top: '100%',
+                        transform: 'translate(-50%,0)'
+                    }
+                },
+                left: {
+                    list: {
+                        borderColor: 'transparent #adf transparent transparent',
+                        left: '0',
+                        bottom: '50%',
+                        transform: 'translate(-100%,50%)'
+                    },
+                    border: {
+                        borderColor: 'transparent aqua transparent  transparent ',
+                        left: '0',
+                        top: '50%',
+                        transform: 'translate(-100%,-50%)'
+                    }
+                }
+            };
+            Array.from(inputs).forEach(item => {
+                item.addEventListener('click', function () {
+                    const v = item.value;
+                    const sty = styles[v];
+                    Object.assign(list.style, sty.list);
+                    Object.assign(border.style, sty.border);
+                });
+            });
+        </script>
+    </body>
+</html>

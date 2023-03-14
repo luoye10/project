@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            html,
+            body {
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                position: relative;
+            }
+            .box1 {
+                animation: my 3s infinite linear;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            @keyframes my {
+                0% {
+                    transform: translate(40px, 20px);
+                }
+                100% {
+                    transform: translate(200px, 100px);
+                    opacity: 0;
+                }
+            }
+            .box1 .left {
+                width: 20px;
+                height: 2px;
+                background: red;
+                transform: rotate(75deg);
+            }
+            .box1 .right {
+                width: 20px;
+                height: 2px;
+                background: red;
+                transform: rotate(-15deg) translate(2px, -1px);
+            }
+            .box1 .bottom {
+                width: 40px;
+                height: 2px;
+                background: red;
+                transform: rotate(45deg) translate(-30px, 6px);
+            }
+            .box2 {
+                animation: move 5s infinite linear;
+                position: absolute;
+                left: 0;
+                top: 10px;
+            }
+            @keyframes move {
+                0% {
+                    transform: translate(20px, 30px);
+                }
+                100% {
+                    transform: translate(300px, 150px);
+                    opacity: 0;
+                }
+            }
+            .box2 .left {
+                width: 20px;
+                height: 2px;
+                background: red;
+                transform: rotate(75deg) translate(120px, -40px);
+            }
+            .box2 .right {
+                width: 20px;
+                height: 2px;
+                background: red;
+                transform: rotate(-15deg) translate(40px, 117px);
+            }
+            .box2 .bottom {
+                width: 40px;
+                height: 2px;
+                background: red;
+                transform: rotate(45deg) translate(92px, 30px);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box1">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="bottom"></div>
+        </div>
+        <div class="box2">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="bottom"></div>
+        </div>
+        <div class="box3">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="bottom"></div>
+        </div>
+        <script>
+            let box1 = document.getElementsByClassName('box1')[0],
+                box2 = document.getElementsByClassName('box2')[0];
+            window.onload = function () {
+                place();
+                place2();
+            };
+            setInterval(place, 3000);
+            setInterval(place2, 5000);
+            function place() {
+                let num = Math.random();
+                box1.style.left = parseInt(num * 20) + 'px';
+                box1.style.top = parseInt(num * 20) + 5 + 'px';
+            }
+            function place2() {
+                let num = Math.random();
+                box2.style.left = parseInt(num * 40) + 'px';
+                box2.style.top = parseInt(num * 40) + 10 + 'px';
+            }
+        </script>
+    </body>
+</html>

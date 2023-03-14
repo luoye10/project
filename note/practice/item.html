@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div,
+            span {
+                margin: 0;
+                padding: 0;
+            }
+            .item {
+                width: 400px;
+                height: 200px;
+                border: 1px solid whitesmoke;
+                border-radius: 5px;
+                font-family: 'Courier New', Courier, monospace;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .text {
+                flex: 2;
+                margin-top: 50px;
+            }
+            .btn {
+                flex: 1;
+                display: flex;
+                margin-bottom: 10px;
+            }
+            .warn,
+            .success,
+            .error {
+                flex: 1;
+                width: 80px;
+                height: 40px;
+                border: 1px solid whitesmoke;
+                border-radius: 5px;
+                text-align: center;
+                line-height: 40px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            .pop:hover {
+                color: #adf;
+                border: 1px solid #adf;
+            }
+            .box,
+            .container,
+            .holder {
+                background: rgba(0, 0, 0, 0.1);
+                display: none;
+                z-index: 1;
+                position: fixed;
+                inset: 0;
+            }
+            .box-content,
+            .con-content,
+            .hold-content {
+                width: 500px;
+                height: 150px;
+                background: whitesmoke;
+                border-radius: 5px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .box-left,
+            .con-content,
+            .hold-left {
+                float: left;
+            }
+            .box-icon,
+            .con-icon,
+            .hold-icon {
+                padding-left: 40px;
+                padding-top: 20px;
+            }
+            .icon-icon,
+            .icon-img,
+            .error-icon {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: orange;
+                color: white;
+                text-align: center;
+                line-height: 20px;
+            }
+            .icon-img {
+                background: green;
+            }
+            .error-icon {
+                background: red;
+            }
+            .icon-text {
+                font-size: 18px;
+            }
+            .box-text,
+            .con-text,
+            .hold-text {
+                padding-left: 35px;
+                padding-top: 15px;
+                font-size: 14px;
+            }
+            .box-right,
+            .con-right,
+            .hold-right {
+                float: right;
+            }
+            .box-star,
+            .con-star,
+            .hold-star {
+                width: 20px;
+                height: 20px;
+                background: rgba(216, 210, 210, 0.829);
+                border-radius: 2px;
+                text-align: center;
+                line-height: 20px;
+                cursor: pointer;
+                margin-left: 120px;
+                margin-top: 10px;
+            }
+            .con-star {
+                margin-top: -60px;
+                margin-left: 20px;
+            }
+            .hold-star {
+                margin-left: 20px;
+                margin-top: 20px;
+            }
+            .box-btn {
+                margin-top: 80px;
+                margin-right: 20px;
+            }
+            .con-btn,
+            .hold-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 3px;
+                background: green;
+                color: white;
+                cursor: pointer;
+                text-align: center;
+                line-height: 40px;
+                margin-top: 60px;
+                margin-right: 20px;
+            }
+            .hold-btn {
+                margin-right: 20px;
+                margin-top: 50px;
+            }
+            .no-sure {
+                border: 1px solid gray;
+                border-radius: 3px;
+                margin-left: 10px;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+            .no-sure:hover {
+                color: #afd;
+                border: 1px solid #afd;
+            }
+            .sure {
+                border-radius: 3px;
+                margin-left: 10px;
+                padding: 5px 10px;
+                background: orange;
+                color: white;
+                cursor: pointer;
+            }
+
+            .sure-pop,
+            .no-pop,
+            .sign-pop,
+            .feel-pop {
+                display: none;
+                width: 100px;
+                height: 40px;
+                border-radius: 3px;
+                background: whitesmoke;
+                margin: 10px auto;
+                font-size: 14px;
+                line-height: 40px;
+            }
+            .feel-pop {
+                width: 120px;
+            }
+            .np,
+            .sp,
+            .sg,
+            .fp {
+                display: inline-block;
+            }
+            .np-icon,
+            .sp-icon,
+            .sg-icon,
+            .fp-icon {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                color: white;
+                background: #afd;
+                text-align: center;
+                line-height: 15px;
+                margin: 10px 15px;
+            }
+            .np-icon {
+                background: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="item">
+            <div class="text">创建一个弹窗</div>
+            <div class="btn">
+                <span class="warn pop">警告</span>
+                <span class="success pop">成功</span>
+                <span class="error pop">错误</span>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-content">
+                <div class="box-left">
+                    <div class="box-icon">
+                        <span class="icon-icon">!</span>
+                        <span class="icon-text">警告</span>
+                    </div>
+                    <div class="box-text">你确定？</div>
+                </div>
+                <div class="box-right">
+                    <div class="box-star">×</div>
+                    <div class="box-btn">
+                        <span class="no-sure">不确定</span>
+                        <span class="sure">确定</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="con-content">
+                <div class="con-left">
+                    <div class="con-icon">
+                        <span class="icon-img">√</span>
+                        <span class="icon-text">成功</span>
+                    </div>
+                    <div class="con-text">厉害</div>
+                </div>
+                <div class="con-right">
+                    <div class="con-star">×</div>
+                    <div class="con-btn">哇</div>
+                </div>
+            </div>
+        </div>
+        <div class="holder">
+            <div class="hold-content">
+                <div class="hold-left">
+                    <div class="hold-icon">
+                        <span class="error-icon">×</span>
+                        <span class="icon-text">错误</span>
+                    </div>
+                    <div class="hold-text">错了</div>
+                </div>
+                <div class="hold-right">
+                    <div class="hold-star">×</div>
+                    <div class="hold-btn">啊</div>
+                </div>
+            </div>
+        </div>
+        <div class="no-pop">
+            <sapn class="np-icon np">×</sapn>
+            <span class="np-text np">不确定</span>
+        </div>
+        <div class="sure-pop">
+            <span class="sp-icon sp">√</span>
+            <span class="sp-text sp">确定</span>
+        </div>
+        <div class="sign-pop">
+            <span class="sg-icon sg">√</span>
+            <span class="sg-text sg">耶！</span>
+        </div>
+        <div class="feel-pop">
+            <span class="fp-icon fp">√</span>
+            <span class="fp-text fp">我就知道</span>
+        </div>
+        <script>
+            let warn = getName('warn'),
+                box = getName('box'),
+                bc = getName('box-content'),
+                bs = getName('box-star'),
+                ns = getName('no-sure'),
+                np = getName('no-pop'),
+                sure = getName('sure'),
+                sp = getName('sure-pop'),
+                success = getName('success'),
+                con = getName('container'),
+                conc = getName('con-content'),
+                cb = getName('con-btn'),
+                cs = getName('con-star'),
+                sg = getName('sign-pop'),
+                error = getName('error'),
+                hold = getName('holder'),
+                hc = getName('hold-content'),
+                hb = getName('hold-btn'),
+                hs = getName('hold-star'),
+                fp = getName('feel-pop');
+            addEvent(document, 'click', () => {
+                box.style.display = 'none';
+                con.style.display = 'none';
+                hold.style.display = 'none';
+            });
+            addEvent(warn, 'click', e => {
+                box.style.display = 'block';
+                e.stopPropagation();
+            });
+            addEvent(bc, 'click', e => {
+                box.style.display = 'block';
+                e.stopPropagation();
+            });
+            addEvent(bs, 'click', e => {
+                box.style.display = 'none';
+                e.stopPropagation();
+            });
+            addEvent(ns, 'click', e => {
+                box.style.display = 'none';
+                np.style.display = 'block';
+                setTimeout(() => {
+                    np.style.display = 'none';
+                }, 2000);
+                e.stopPropagation();
+            });
+            addEvent(sure, 'click', e => {
+                box.style.display = 'none';
+                sp.style.display = 'block';
+                setTimeout(() => {
+                    sp.style.display = 'none';
+                }, 2000);
+                e.stopPropagation();
+            });
+
+            addEvent(success, 'click', e => {
+                con.style.display = 'block';
+                e.stopPropagation();
+            });
+            addEvent(conc, 'click', e => {
+                con.style.display = 'block';
+                e.stopPropagation();
+            });
+            addEvent(cb, 'click', e => {
+                con.style.display = 'none';
+                sg.style.display = 'block';
+                setTimeout(() => {
+                    sg.style.display = 'none';
+                }, 2000);
+                e.stopPropagation();
+            });
+            addEvent(cs, 'click', e => {
+                con.style.display = 'none';
+                e.stopPropagation();
+            });
+
+            addEvent(error, 'click', e => {
+                hold.style.display = 'block';
+                e.stopPropagation();
+            });
+            addEvent(hc, 'click', e => {
+                hold.style.display = 'block';
+                e.stopPropagation();
+            });
+            addEvent(hs, 'click', e => {
+                hold.style.display = 'none';
+                e.stopPropagation();
+            });
+            addEvent(hb, 'click', e => {
+                hold.style.display = 'none';
+                fp.style.display = 'block';
+                setTimeout(() => {
+                    fp.style.display = 'none';
+                }, 2000);
+                e.stopPropagation();
+            });
+            function getName(obj) {
+                return document.getElementsByClassName(obj)[0];
+            }
+            function addEvent(obj, str, callback) {
+                if (obj.addEventListener) {
+                    obj.addEventListener(str, callback);
+                } else {
+                    obj.attachEvent('on' + str, () => {
+                        callback.call(obj);
+                    });
+                }
+            }
+        </script>
+    </body>
+</html>

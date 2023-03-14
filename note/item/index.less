@@ -1,0 +1,206 @@
+html,
+body,
+div,
+span,
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+ul,
+li {
+    list-style: none;
+}
+.container {
+    display: flex;
+    position: relative;
+    background: rgba(227, 219, 213, 0.701);
+    .left {
+        flex: 1;
+        display: flex;
+        padding-right: 20px;
+        box-sizing: border-box;
+        .icons {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            padding-left: 50px;
+            .list {
+                padding: 10px 0;
+                flex: 1;
+                font-weight: bold;
+                cursor: pointer;
+                .text {
+                    font-size: 14px;
+                    display: none;
+                }
+                i {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                }
+                &:hover {
+                    .text {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+        .title {
+            flex: 2;
+            padding-top: 80px;
+            .name {
+                font-size: 50px;
+                font-weight: 800;
+                letter-spacing: 0.2em;
+            }
+            .text {
+                margin-top: 10px;
+                font-size: 18px;
+                font-weight: 600;
+                letter-spacing: 0.2em;
+            }
+            .bottom {
+                margin-top: 30px;
+                font-size: 14px;
+                text-align: justify;
+                line-height: 20px;
+            }
+        }
+    }
+    .star {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: rotate(-15deg);
+        color: red;
+    }
+    .right {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        padding-left: 50px;
+        .item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-right: 120px;
+            padding-left: 10px;
+            text-align: left;
+            margin: 20px 0;
+            border-left: 5px solid transparent;
+            .title {
+                flex: 1;
+                font-size: 20px;
+                font-style: italic;
+            }
+            .content {
+                flex: 2;
+                margin: 10px 2px;
+                line-height: 24px;
+            }
+            .lable {
+                flex: 1;
+                .point {
+                    display: inline-block;
+                    margin: 2px 10px;
+                }
+            }
+            &:hover {
+                cursor: pointer;
+                background: rgba(192, 180, 180, 0.628);
+                opacity: 0.5;
+                border-left: 5px rgba(183, 24, 24, 0.785) solid;
+                border-radius: 3px;
+            }
+        }
+    }
+    .holder {
+        display: none;
+        flex: 2;
+        .itemList {
+            display: flex;
+            flex-direction: column;
+            padding-top: 30px;
+            padding-left: 50px;
+            .list {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                padding: 10px 20px;
+                border-left: 5px solid transparent;
+                .title {
+                    flex: 1;
+                    .word {
+                        font-size: 20px;
+                        font-style: italic;
+                        padding-right: 10px;
+                    }
+                    .holder-time {
+                        letter-spacing: 0.1em;
+                    }
+                }
+                .content {
+                    flex: 2;
+                    margin: 10px 2px;
+                    line-height: 24px;
+                }
+                &:hover {
+                    cursor: pointer;
+                    background: rgba(192, 180, 180, 0.628);
+                    opacity: 0.5;
+                    border-left: 5px rgba(183, 24, 24, 0.785) solid;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+    .right-case {
+        display: none;
+        flex: 2;
+        padding-left: 50px;
+        padding-right: 150px;
+        padding-top: 50px;
+        box-sizing: border-box;
+        .title {
+            font-size: 24px;
+            letter-spacing: 0.1em;
+        }
+        .lable {
+            padding: 10px 0;
+            .point {
+                display: inline-block;
+                padding: 2px 10px;
+            }
+        }
+        .content {
+            padding: 10px 2px;
+            line-height: 26px;
+        }
+        h3 {
+            padding: 20px;
+        }
+        p {
+            padding: 10px 0;
+            line-height: 26px;
+            text-align: justify;
+        }
+    }
+}
+.active {
+    color: red;
+}
+html::-webkit-scrollbar {
+    width: 5px;
+}
+html::-webkit-scrollbar-thumb {
+    width: 3px;
+    height: 50px;
+    background: rgba(183, 24, 24, 0.785);
+    border-radius: 3px;
+}

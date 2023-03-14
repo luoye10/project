@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>move</title>
+        <style>
+            .box {
+                width: 100px;
+                height: 100px;
+                background: #6cf;
+                border-radius: 5px;
+                position: relative;
+                left: 0;
+            }
+            .list {
+                width: 200px;
+                height: 200px;
+                border: 1px solid grey;
+            }
+            .test {
+                width: 100px;
+                height: 100px;
+                border: 1px solid red;
+                padding: 50px;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+        <button class="move">移动</button>
+        <div class="list">
+            <div class="test"></div>
+        </div>
+        <script>
+            const box = document.querySelector('.box');
+            const move = document.querySelector('.move');
+            const moveFn = () => {
+                box.style.left = parseInt(box.style.left || '0') + 1 + 'px';
+            };
+            move.addEventListener('click', e => {
+                moveFn();
+            });
+            setInterval(moveFn, 100);
+            let list = document.getElementsByClassName('list')[0],
+                test = document.getElementsByClassName('test')[0];
+            list.addEventListener(
+                'click',
+                function () {
+                    console.log(list);
+                },
+                true
+            );
+            test.addEventListener(
+                'click',
+                function () {
+                    console.log(test);
+                },
+                false
+            );
+        </script>
+    </body>
+</html>

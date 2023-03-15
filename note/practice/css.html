@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            ul {
+                list-style: none;
+            }
+
+            ol li {
+                color: aqua;
+            }
+            ol > li {
+                color: red;
+            }
+            .tips {
+                color: red;
+                margin-left: 20px;
+                visibility: hidden;
+            }
+            :focus + .tips {
+                visibility: visible;
+            }
+            .cs-flex {
+                display: inline-flex;
+                flex-direction: row-reverse;
+            }
+            .cs-input {
+                width: 200px;
+            }
+            .cs-lable {
+                width: 70px;
+            }
+            :focus ~ .cs-lable {
+                color: blue;
+                text-shadow: 0 0 1px;
+            }
+            img {
+                max-width: 300px;
+
+                /* box-sizing: border-box;
+                padding: 90px; */
+
+                /* transform: scale(0.625); */
+            }
+        </style>
+    </head>
+    <body>
+        <ol class="list">
+            <li>这是一段文字</li>
+            <li>
+                <ul>
+                    <li>这是一段文字</li>
+                    <li>这是一段文字</li>
+                </ul>
+            </li>
+            <li>这是一段文字</li>
+        </ol>
+        <div>
+            用户名：<input type="text" />
+            <span class="tips">不超过10个字</span>
+        </div>
+        <br />
+        <div class="cs-flex">
+            <input class="cs-input" />
+            <label class="cs-lable">用户名：</label>
+        </div>
+        <br />
+        <br />
+
+        <img src="./1.jpg" style="width: 480px !important" />
+    </body>
+</html>

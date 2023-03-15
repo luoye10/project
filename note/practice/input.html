@@ -161,7 +161,7 @@
         </div>
         <div class="prompt">已设置为最小值</div>
         <div class="pointer">已设置为最大值</div>
-        <audio src="./11670.mp3" class="audio" loop></audio>
+        <audio src="./11670.mp3" class="audio" loop volume="0.2"></audio>
         <script>
             let list = getItem('list'),
                 border = getItem('border'),
@@ -178,43 +178,47 @@
             function getItem(item) {
                 return document.getElementsByClassName(item)[0];
             }
-            reduce.addEventListener('click', function () {
+            document.onclick = () => {
                 audio.play();
                 audio.volume = 0.2;
-                width -= 1;
-                w -= 1;
-                n -= 1;
-                if (w <= 6) {
-                    width = 16;
-                    w = 6;
-                    n = 6;
-                    prompt.style.opacity = '1';
-                    setTimeout(() => {
-                        prompt.style.opacity = '0';
-                    }, 3000);
+            };
+            /**
+             * @desc 修改三角尺寸
+             * @params type 'add' | 'reduce' 增加或者减小
+             */
+            const change = type => {
+                let step = 1;
+                if (type === 'add') {
+                    if (w >= 30) {
+                        showTip(pointer);
+                        return;
+                    }
                 }
-                list.style.borderWidth = width + 'px';
-                border.style.borderWidth = w + 'px';
-                num.innerText = n;
+                if (type === 'reduce') {
+                    step = -1;
+                    if (w <= 6) {
+                        showTip(prompt);
+                        return;
+                    }
+                }
+                w += step;
+                n += step;
+                width += step;
+                list.style.borderWidth = `${width}px`;
+                border.style.borderWidth = `${w}px`;
+                num.innerHTML = n;
+            };
+            const showTip = el => {
+                el.style.opacity = 1;
+                setTimeout(() => {
+                    el.style.opacity = 0;
+                }, 3000);
+            };
+            reduce.addEventListener('click', function () {
+                change('reduce');
             });
             add.addEventListener('click', function () {
-                audio.play();
-                audio.volume = 0.2;
-                width += 1;
-                w += 1;
-                n += 1;
-                if (w >= 30) {
-                    width = 40;
-                    w = 30;
-                    n = 30;
-                    pointer.style.opacity = '1';
-                    setTimeout(() => {
-                        pointer.style.opacity = '0';
-                    }, 3000);
-                }
-                list.style.borderWidth = width + 'px';
-                border.style.borderWidth = w + 'px';
-                num.innerText = n;
+                change('add');
             });
             const styles = {
                 top: {

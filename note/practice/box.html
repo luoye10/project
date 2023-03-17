@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div,
+            span {
+                margin: 0;
+                padding: 0;
+            }
+            .box {
+                width: 400px;
+                height: 150px;
+                border: 1px solid whitesmoke;
+                border-radius: 3px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+            }
+            .title {
+                font-size: 24px;
+                padding-bottom: 30px;
+            }
+            .text {
+                font-family: 'Courier New', Courier, monospace;
+            }
+            .btn {
+                width: 50px;
+                height: 30px;
+                border: 1px solid greenyellow;
+                border-radius: 3px;
+                text-align: center;
+                line-height: 30px;
+                font-size: 14px;
+                color: greenyellow;
+                margin-top: 20px;
+                cursor: pointer;
+            }
+            .pop {
+                background: rgba(213, 208, 208, 0.767);
+                position: fixed;
+                display: none;
+                inset: 0;
+            }
+            .content {
+                width: 500px;
+                height: 150px;
+                background: whitesmoke;
+                border-radius: 3px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .left {
+                margin: 20px 40px;
+            }
+            .icon {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: green;
+                color: white;
+                text-align: center;
+                line-height: 20px;
+            }
+            .word {
+                font-size: 24px;
+                margin-left: 10px;
+            }
+            .list {
+                font-family: 'Courier New', Courier, monospace;
+                margin-top: 10px;
+            }
+            .right {
+                float: right;
+                /* margin-right: 20px; */
+            }
+            .star {
+                width: 20px;
+                height: 20px;
+                border-radius: 3px;
+                text-align: center;
+                line-height: 20px;
+                background: grey;
+                margin-top: -80px;
+                margin-left: 30px;
+                cursor: pointer;
+            }
+            .test {
+                width: 50px;
+                height: 30px;
+                border-radius: 3px;
+                background: green;
+                color: white;
+                text-align: center;
+                line-height: 30px;
+                margin-top: 60px;
+                margin-right: 20px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="title">异步</div>
+            <div class="text">对话框可以异步</div>
+            <div class="btn">成功</div>
+        </div>
+        <div class="pop">
+            <div class="content">
+                <div class="left">
+                    <div class="item">
+                        <span class="icon">√</span>
+                        <span class="word">异步</span>
+                    </div>
+                    <div class="list">点击，倒计时 3 秒</div>
+                </div>
+                <div class="right">
+                    <div class="star">×</div>
+                    <div class="test">确认</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let btn = document.getElementsByClassName('btn')[0],
+                pop = document.getElementsByClassName('pop')[0],
+                content = document.getElementsByClassName('content')[0],
+                list = document.getElementsByClassName('list')[0],
+                star = document.getElementsByClassName('star')[0],
+                test = document.getElementsByClassName('test')[0];
+            btn.addEventListener('click', el => {
+                pop.style.display = 'block';
+                el.stopPropagation();
+            });
+            content.addEventListener('click', el => {
+                content.style.display = 'block';
+                el.stopPropagation();
+            });
+            star.addEventListener('click', () => {
+                pop.style.display = 'none';
+            });
+            test.addEventListener('click', () => {
+                setTimeout(() => {
+                    list.innerHTML = '倒计时 2 秒';
+                }, 1000);
+                setTimeout(() => {
+                    list.innerHTML = '倒计时 1 秒';
+                }, 2000);
+                setTimeout(() => {
+                    pop.style.display = 'none';
+                    list.innerHTML = '点击，倒计时 3 秒';
+                }, 3000);
+            });
+            document.addEventListener('click', () => {
+                pop.style.display = 'none';
+            });
+        </script>
+    </body>
+</html>

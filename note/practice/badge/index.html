@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div,
+            span {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                width: 300px;
+                height: 150px;
+                border: 1px solid #dadada;
+                border-radius: 5px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+            }
+            .text {
+                font-size: 20px;
+            }
+            .item {
+                display: flex;
+                margin-top: 20px;
+            }
+            .box {
+                width: 50px;
+                height: 50px;
+                background: grey;
+                border-radius: 5px;
+                position: relative;
+            }
+            .num {
+                position: absolute;
+                right: 0;
+                top: 0;
+                transform: translate(50%, -50%);
+                height: 20px;
+                padding: 0 5px;
+                border-radius: 50%;
+                background: red;
+                color: white;
+                text-align: center;
+                line-height: 20px;
+            }
+            .num.hide {
+                opacity: 0;
+            }
+            .num.a {
+                border-radius: 10px;
+            }
+            .list {
+                flex: 1;
+                margin-left: 30px;
+            }
+            .add,
+            .reduce {
+                display: inline-block;
+                width: 60px;
+                height: 50px;
+                border: 1px solid grey;
+                border-radius: 5px;
+                margin: 0 -3px;
+                text-align: center;
+                line-height: 50px;
+                cursor: pointer;
+                user-select: none;
+            }
+            .add:active,
+            .reduce:active {
+                border: 1px solid aqua;
+                color: aqua;
+                box-shadow: 0 0 2px 2px aqua;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="text">基础用法</div>
+            <div class="item">
+                <div class="box">
+                    <div class="num">1</div>
+                </div>
+                <div class="list">
+                    <div class="add">＋</div>
+                    <div class="reduce">－</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let num = getName('num'),
+                add = getName('add'),
+                reduce = getName('reduce');
+            let numValue = 1;
+            add.addEventListener('click', () => {
+                num.classList.remove('hide');
+                if (numValue >= 15) {
+                    num.innerText = '15+';
+                    return;
+                }
+                numValue++;
+                if (numValue >= 10) {
+                    num.classList.add('a');
+                }
+                num.innerText = numValue;
+            });
+            reduce.addEventListener('click', () => {
+                if (numValue < 1) {
+                    num.classList.add('hide');
+                    return;
+                }
+                numValue--;
+                if (numValue < 10) {
+                    num.classList.remove('a');
+                }
+                num.innerText = numValue;
+            });
+            function getName(str) {
+                return document.getElementsByClassName(str)[0];
+            }
+        </script>
+    </body>
+</html>

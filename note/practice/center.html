@@ -6,26 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>元素水平垂直居中</title>
         <style>
-            .box,
-            .parent,
-            .container {
+            .parent {
                 position: relative;
                 width: 200px;
                 height: 200px;
                 border: 1px solid red;
                 margin-top: 10px;
             }
-            .test {
-                width: 50px;
-                height: 10px;
-                background: aqua;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: -25px;
-                margin-top: -5px;
-            }
             .child {
+                /* 绝对定位配合 transform 实现 */
                 width: 50px;
                 height: 50px;
                 background: #bcf;
@@ -34,6 +23,7 @@
                 top: 50%;
                 transform: translate(-50%, -50%);
             }
+
             .item {
                 width: 200px;
                 height: 200px;
@@ -42,12 +32,15 @@
                 display: flex;
             }
             .index {
+                /* 父元素 flex 布局，子元素 margin:auto 配合实现 */
                 width: 50px;
                 height: 50px;
                 background: #a6f;
                 margin: auto;
             }
+
             .flex {
+                /* flex 布局 */
                 width: 200px;
                 height: 200px;
                 border: 1px solid red;
@@ -61,7 +54,16 @@
                 height: 50px;
                 background: #afc;
             }
+
+            .container {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                border: 1px solid red;
+                margin-top: 10px;
+            }
             .list {
+                /* 绝对定位配合 margin:auto 的实现 */
                 width: 50px;
                 height: 50px;
                 background: #f91;
@@ -75,9 +77,6 @@
         </style>
     </head>
     <body>
-        <div class="box">
-            <div class="test"></div>
-        </div>
         <div class="parent">
             <div class="child"></div>
         </div>
